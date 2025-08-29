@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECS - The Electronics Club @ SASTRA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Sections Common Styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Roboto Slab', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        /* Achievements Section */
+        .achievements {
+            background-color: var(--light);
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .achievement-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .achievement-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .achievement-card p {
+            color: var(--text-light);
+        }
+        
+        /* Workshops Section */
+        .workshops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .workshop-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .workshop-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .workshop-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .workshop-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .workshop-card:hover .workshop-image img {
+            transform: scale(1.1);
+        }
+        
+        .workshop-content {
+            padding: 20px;
+        }
+        
+        .workshop-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .workshop-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .workshop-links a {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .workshop-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Recruitment Section */
+        .recruitment {
+            background: linear-gradient(rgba(231, 76, 60, 0.9), rgba(231, 76, 60, 0.9)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .recruitment h2 {
+            color: white;
+        }
+        
+        .recruitment h2:after {
+            background: white;
+        }
+        
+        .recruitment p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            width: 20px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo-text span {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <img src="https://tecsastra.wordpress.com/wp-content/uploads/2016/05/cropped-12920476_1268482029864298_5136013071555078375_n.jpg?w=182" alt="TECS Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>THE ELECTRONICS CLUB @ SASTRA</h1>
+                        <span>(TECS)</span>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#workshops">Workshops</a></li>
+                    <li><a href="#recruitment">Recruitment</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Innovate. Create. Electronics.</h2>
+                <p>Welcome to The Electronics Club at SASTRA University - Where ideas become reality through electronics</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn">Learn More</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About TECS</h2>
+                <p>Learn about our mission, vision, and what makes us unique</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://tecsastra.wordpress.com/wp-content/uploads/2016/05/546038_217422051701118_1116287541_n.jpg?w=775" alt="TECS Team">
+                </div>
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>The Electronics Club at SASTRA University (TECS) is a community of electronics enthusiasts dedicated to innovation, learning, and practical application of electronic principles.</p>
+                    <p>We provide a platform for students to explore electronics, participate in workshops, work on projects, and compete in national-level events.</p>
+                    <p>Our members gain hands-on experience with various electronic components, microcontrollers, and circuit design, preparing them for real-world challenges.</p>
+                    <a href="#contact" class="btn">Join Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section achievements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Achievements</h2>
+                <p>Recognizing the excellence and accomplishments of our members</p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <h3>TECS EXPO '17</h3>
+                    <p>Successfully conducted 'TECS EXPO '17' which showcased projects completed by our team on April 8-9, 2017 at SASTRA University.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>SHAASTRA 2017</h3>
+                    <p>Our team stood 2nd in BlackBox and 2nd/3rd in Arduino Programming Challenge in SHAASTRA 2017, IIT Madras techfest.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>SHAASTRA 2016</h3>
+                    <p>Stood 3rd in ELECKART event conducted in SHAASTRA 2016, a National Level Tech fest of IIT Madras.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>DAKSH 2016</h3>
+                    <p>Stood 2nd in Trap the Glitch Event in DAKSH 2016, a techfest of SASTRA University.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>PROBE 2016</h3>
+                    <p>Stood 2nd in Embedtronix in Probe 2016, a department fest of ECE, NIT Trichy.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Multiple Finalists</h3>
+                    <p>Finalists in SHAASTRA Circuit Design Challenge (SCDC) 2016 & 2017, and CIRCUITRIX in PRAGYAN 16, NIT Trichy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Workshops</h2>
+                <p>Hands-on learning experiences for electronics enthusiasts</p>
+            </div>
+            <div class="workshops-grid">
+                <div class="workshop-card">
+                    <div class="workshop-image">
+                        <img src="https://tecsastra.wordpress.com/wp-content/uploads/2016/07/workshopfinal2.jpg?w=280&h=280&crop=1" alt="Arduino Workshop">
+                    </div>
+                    <div class="workshop-content">
+                        <h3>Arduino Interfacing Workshop</h3>
+                        <p>Learn to interface various sensors and components with Arduino microcontroller boards.</p>
+                        <div class="workshop-links">
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2016/07/reflexivesystem.pdf">Counter Code</a>
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2016/07/lcd-code.docx">LCD Code</a>
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2016/07/speed-control.docx">Speed Control</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="workshop-card">
+                    <div class="workshop-image">
+                        <img src="https://tecsastra.wordpress.com/wp-content/uploads/2016/08/img-20160804-wa0005.jpg?w=280&h=280&crop=1" alt="Circuit Design Workshop">
+                    </div>
+                    <div class="workshop-content">
+                        <h3>Circuit Design Workshop</h3>
+                        <p>Master the fundamentals of electronic circuit design and PCB fabrication.</p>
+                        <div class="workshop-links">
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2016/08/pin-diagrams-workshop.docx">Pin Diagrams</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="workshop-card">
+                    <div class="workshop-image">
+                        <img src="https://tecsastra.wordpress.com/wp-content/uploads/2016/05/cropped-cropped-cropped-792997-1280x720.jpg?w=280&h=280&crop=1" alt="NodeMCU Workshop">
+                    </div>
+                    <div class="workshop-content">
+                        <h3>NodeMCU Workshop</h3>
+                        <p>Explore IoT applications with NodeMCU ESP8266 and connect devices to the cloud.</p>
+                        <div class="workshop-links">
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2017/07/blinking_led_esp8266_2.doc">Blinking LED</a>
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2017/07/led-on-and-off.pdf">LED Control</a>
+                            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2017/07/ultrasonic-sensor-module-code-new.docx">Ultrasonic Sensor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recruitment Section -->
+    <section id="recruitment" class="section recruitment">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recruitment 2025</h2>
+                <p>Join our community of electronics enthusiasts and innovators</p>
+            </div>
+            <p>We're looking for passionate students interested in electronics, programming, and innovation. Whether you're a beginner or have experience, TECS provides the perfect platform to learn and grow.</p>
+            <a href="https://tecsastra.wordpress.com/wp-content/uploads/2017/07/selected-members-of-tecs.docx" class="btn">View Results</a>
+            <a href="#contact" class="btn btn-outline">Express Interest</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for queries, collaborations, or to join our club</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> VIDYUT VIHAR 331 (VV-331), SASTRA University, Thanjavur</p>
+                    <p><i class="fas fa-envelope"></i> electronicsclub.sastra@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Club meetings: Every Friday, 4:00 PM</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/tecsastra/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/theelectronicsclubsastra/"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About TECS</h3>
+                    <p>The Electronics Club at SASTRA University fosters innovation and learning in electronics through workshops, projects, and competitions.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#achievements">Achievements</a></li>
+                        <li><a href="#workshops">Workshops</a></li>
+                        <li><a href="#recruitment">Recruitment</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://tecsastra.wordpress.com/workshops/nodemcu-workshop-registration/">NodeMCU Workshop</a></li>
+                        <li><a href="https://tecsastra.wordpress.com/recruitment-registration-2017/">Recruitment Registration</a></li>
+                        <li><a href="https://tecsastra.wordpress.com/recruitment-2017/">Recruitment Details</a></li>
+                        <li><a href="#">Project Guidelines</a></li>
+                        <li><a href="#">Learning Materials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <p>Follow us on social media to stay updated with our latest activities and events.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/tecsastra/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/theelectronicsclubsastra/"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 The Electronics Club @ SASTRA (TECS). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
